@@ -213,7 +213,7 @@ const dative = text => {
     voice(text),
 
     // if ends with a vowel, echo the genitive
-    // sound ⟨n⟩ right before the voiced suffix
+    // sound ⟨y⟩ right before the voiced suffix
     !endsWithConsonant(text) ? Suffix.Y : NOTHING,
 
     // ⟨e⟩ ⟨a⟩
