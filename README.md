@@ -30,25 +30,25 @@ the use of the term predicate in theories of grammar.
 Kefir is designed to construct sentences by predicate-logic.  
 https://www.wikiwand.com/en/Predicate_(grammar)
 
-```python
->>> ayni = subject('aynı')
->>> havuc = subject('havuç')
->>> gel = predicate('gel', 'third', 'perfective')
->>> yap = predicate('yap', 'third', 'perfective')
->>> dal = predicate('dal', 'third', 'progressive')
->>> dal = predicate(dal, 'third', 'perfective')
+```javascript
+let ayni = subject('aynı');
+let havuc = subject('havuç');
+let gel = predicate('gel', 'third', 'perfective');
+let yap = predicate('yap', 'third', 'perfective');
+let dal = predicate('dal', 'third', 'progressive');
+dal = predicate(dal, 'third', 'perfective');
 
->>> birisi = subject('yakup')
->>> [sentence(birisi, eylem) for eylem in (yap, dal,)]
-['yakup yaptı', 'yakup dalmaktaydı']
+let birisi = subject('yakup')
+[yap, dal].map(eylem => sentence(birisi, eylem));
+// => ['yakup yaptı', 'yakup dalmaktaydı']
 
->>> [sentence(havuc, eylem) for eylem in (gel, yap, dal)]
-['havuç geldi', 'havuç yaptı', 'havuç dalmaktaydı']
+[yap, gel, dal].map(eylem => sentence(havuc, eylem));
+// => ['havuç geldi', 'havuç yaptı', 'havuç dalmaktaydı']
 
->>> sebze = predicate(locative('marul'), 'first', 'perfective', True)
->>> dal = predicate(locative('dal'), 'first', 'perfective', True)
->>> [sentence(ayni, eylem) for eylem in (sebze, dal)]
-['aynı maruldaydık', 'aynı daldaydık']
+let sebze = predicate(locative('marul'), 'first', 'perfective', true);
+dal = predicate(locative('dal'), 'first', 'perfective', true);
+[sebze, dal].map(eylem => sentence(ayni, eylem);
+// => ['aynı maruldaydık', 'aynı daldaydık']
 
 ```
 
@@ -209,18 +209,18 @@ TODO: Document consonant harmony.
 #### swap_front_and_back
 Swaps front sounds to back, and vice versa
 
-```python
->>> swap_front_and_back('acak')
-'ecek'
+```javascript
+swap_front_and_back('acak');
+// => 'ecek'
 
->>> swap_front_and_back('ocok')
-'öcök'
+swap_front_and_back('ocok');
+// => 'öcök'
 
->>> swap_front_and_back('öcök')
-'ocok'
+swap_front_and_back('öcök');
+// => 'ocok'
 
->>> swap_front_and_back('acak')
-'ecek'
+swap_front_and_back('acak');
+// => 'ecek'
 
 ```
 
@@ -311,9 +311,9 @@ evlerinin önü yonca (the front of their home [is-a] plant called yonca)
 ```
 
 ✎︎ tests
-```python
->>> zero('yolcu')
-'yolcu'
+```javascript
+zero('yolcu');
+// => 'yolcu'
 
  ```
 
@@ -331,9 +331,9 @@ evlerinin önü yonca değildir (the front of their home [is-not-a] yonca)
 ```
 
 ✎︎ tests
-```python
->>> negative('yolcu')
-'yolcu değil'
+```javascript
+negative('yolcu');
+// => 'yolcu değil'
 
 ```
 
@@ -349,13 +349,13 @@ evlerinin önü yoncadır (the front of their home [is] plant called yonca)
 ```
 
 ✎︎ tests
-```python
->>> tobe('yolcu')
-'yolcudur'
->>> tobe('üzüm')
-'üzümdür'
->>> tobe('yonca')
-'yoncadır'
+```javascript
+tobe('yolcu');
+// => 'yolcudur'
+tobe('üzüm');
+// => 'üzümdür'
+tobe('yonca');
+// => 'yoncadır'
 
 ```
 
@@ -370,15 +370,15 @@ aynı gezegenliyiz (we're from same planet)
 ```
 
 ✎︎ tests
-```python
->>> personal('uçak', Person.FIRST, is_plural=False)
-'uçağım'
+```javascript
+personal('uçak', Person.FIRST, is_plural=false);
+// => 'uçağım'
 
->>> personal('oralı', Person.SECOND, is_plural=False)
-'oralısın'
+personal('oralı', Person.SECOND, is_plural=false);
+// => 'oralısın'
 
->>> personal('gezegenli', Person.FIRST, is_plural=True)
-'gezegenliyiz'
+personal('gezegenli', Person.FIRST, is_plural=true);
+// => 'gezegenliyiz'
 
 ```
 
@@ -396,21 +396,21 @@ doktormuş (he/she/it was a doctor as i've heard)
 ```
 
 ✎︎ tests
-```python
->>> inferential('öğretmen', Person.SECOND, is_plural=False)
-'öğretmenmişsin'
+```javascript
+inferential('öğretmen', Person.SECOND, is_plural=false);
+// => 'öğretmenmişsin'
 
->>> inferential('üzül', Person.SECOND, is_plural=False)
-'üzülmüşsün'
+inferential('üzül', Person.SECOND, is_plural=false);
+// => 'üzülmüşsün'
 
->>> inferential('robot', Person.FIRST, is_plural=False)
-'robotmuşum'
+inferential('robot', Person.FIRST, is_plural=false);
+// => 'robotmuşum'
 
->>> inferential('robot', Person.THIRD, is_plural=False)
-'robotmuş'
+inferential('robot', Person.THIRD, is_plural=false);
+// => 'robotmuş'
 
->>> inferential('ada', Person.THIRD, is_plural=False)
-'adaymış'
+inferential('ada', Person.THIRD, is_plural=false);
+// => 'adaymış'
 
 ```
 
@@ -427,13 +427,13 @@ bıçaklarsa (if they are a knife)
 ```
 
 ✎︎ tests
-```python
->>> conditional('elma', Person.FIRST, is_plural=False)
-'elmaysam'
->>> conditional('üzüm', Person.SECOND, is_plural=False)
-'üzümsen'
->>> conditional('bıçak', Person.THIRD, is_plural=True)
-'bıçaklarsa'
+```javascript
+conditional('elma', Person.FIRST, is_plural=false);
+// => 'elmaysam'
+conditional('üzüm', Person.SECOND, is_plural=false);
+// => 'üzümsen'
+conditional('bıçak', Person.THIRD, is_plural=true);
+// => 'bıçaklarsa'
 
 ```
 
@@ -451,30 +451,30 @@ doktordu (he/she/it was a doctor)
 ```
 
 ✎︎ tests
-```python
->>> perfective('açık', Person.FIRST, is_plural=False)
-'açıktım'
+```javascript
+perfective('açık', Person.FIRST, is_plural=false);
+// => 'açıktım'
 
->>> perfective('oralı', Person.SECOND, is_plural=False)
-'oralıydın'
+perfective('oralı', Person.SECOND, is_plural=false);
+// => 'oralıydın'
 
->>> perfective('dalda', Person.FIRST, is_plural=False)
-'daldaydım'
+perfective('dalda', Person.FIRST, is_plural=false);
+// => 'daldaydım'
 
->>> perfective('dalda', Person.THIRD, is_plural=False)
-'daldaydı'
+perfective('dalda', Person.THIRD, is_plural=false);
+// => 'daldaydı'
 
->>> perfective('dalda', Person.FIRST, is_plural=True)
+perfective('dalda', Person.FIRST, is_plural=true);
 'daldaydık'
 
->>> perfective('dalda', Person.SECOND, is_plural=True)
-'daldaydınız'
+perfective('dalda', Person.SECOND, is_plural=true);
+// => 'daldaydınız'
 
->>> perfective('dalda', Person.THIRD, is_plural=True)
-'daldaydılar'
+perfective('dalda', Person.THIRD, is_plural=true);
+// => 'daldaydılar'
 
->>> perfective('gezegende', Person.THIRD, is_plural=True)
-'gezegendeydiler'
+perfective('gezegende', Person.THIRD, is_plural=true);
+// => 'gezegendeydiler'
 
 ```
 
@@ -492,30 +492,30 @@ kayıyor (he's skating)
 ```
 
 ✎︎ tests
-```python
->>> imperfective('açı', Person.FIRST, is_plural=False)
-'açıyorum'
+```javascript
+imperfective('açı', Person.FIRST, is_plural=false);
+// => 'açıyorum'
 
->>> imperfective('açık', Person.FIRST, is_plural=False)
-'açıkıyorum'
+imperfective('açık', Person.FIRST, is_plural=false);
+// => 'açıkıyorum'
 
->>> imperfective('oralı', Person.SECOND, is_plural=False)
-'oralıyorsun'
+imperfective('oralı', Person.SECOND, is_plural=false);
+// => 'oralıyorsun'
 
->>> imperfective('dal', Person.THIRD, is_plural=False)
-'dalıyor'
+imperfective('dal', Person.THIRD, is_plural=false);
+// => 'dalıyor'
 
->>> imperfective('dal', Person.FIRST, is_plural=True)
-'dalıyoruz'
+imperfective('dal', Person.FIRST, is_plural=true);
+// => 'dalıyoruz'
 
->>> imperfective('dal', Person.FIRST, is_plural=True)
-'dalıyoruz'
+imperfective('dal', Person.FIRST, is_plural=true);
+// => 'dalıyoruz'
 
->>> imperfective('dal', Person.SECOND, is_plural=True)
-'dalıyorsunuz'
+imperfective('dal', Person.SECOND, is_plural=true);
+// => 'dalıyorsunuz'
 
->>> imperfective('dal', Person.THIRD, is_plural=True)
-'dalıyorlar'
+imperfective('dal', Person.THIRD, is_plural=true);
+// => 'dalıyorlar'
 
 ```
 
@@ -532,15 +532,15 @@ can alacak (he'll kill someone)
 ```
 
 ✎︎ tests
-```python
->>> future('gel', Person.FIRST, is_plural=False)
-'geleceğim'
+```javascript
+future('gel', Person.FIRST, is_plural=false);
+// => 'geleceğim'
 
->>> future('açık', Person.FIRST, is_plural=False)
-'açıkacağım'
+future('açık', Person.FIRST, is_plural=false);
+// => 'açıkacağım'
 
->>> future('gel', Person.FIRST, is_plural=True)
-'geleceğiz'
+future('gel', Person.FIRST, is_plural=true);
+// => 'geleceğiz'
 
 ```
 
@@ -552,15 +552,15 @@ gülmekteyim (i am in the process of laughing)
 ölmekteler (they are in the process of dying 👾)
 
 ✎︎ tests
-```python
->>> progressive('gel', Person.FIRST, is_plural=False)
-'gelmekteyim'
+```javascript
+progressive('gel', Person.FIRST, is_plural=false);
+// => 'gelmekteyim'
 
->>> progressive('açık', Person.FIRST, is_plural=False)
-'açıkmaktayım'
+progressive('açık', Person.FIRST, is_plural=false);
+// => 'açıkmaktayım'
 
->>> progressive('gel', Person.FIRST, is_plural=True)
-'gelmekteyiz'
+progressive('gel', Person.FIRST, is_plural=true);
+// => 'gelmekteyiz'
 
 ```
 
@@ -574,15 +574,15 @@ kaçmalıyım (i must run away)
 ```
 
 ✎︎ tests
-```python
->>> necessitative('git', Person.FIRST, is_plural=False)
-'gitmeliyim'
+```javascript
+necessitative('git', Person.FIRST, is_plural=false);
+// => 'gitmeliyim'
 
->>> necessitative('açık', Person.FIRST, is_plural=False)
-'açıkmalıyım'
+necessitative('açık', Person.FIRST, is_plural=false);
+// => 'açıkmalıyım'
 
->>> necessitative('uza', Person.FIRST, is_plural=True)
-'uzamalıyız'
+necessitative('uza', Person.FIRST, is_plural=true);
+// => 'uzamalıyız'
 
 ```
 
@@ -596,30 +596,30 @@ kaçamayız (we cannot run away)
 ```
 
 ✎︎ tests
-```python
->>> impotential('git', Person.FIRST, is_plural=False)
-'gidemem'
+```javascript
+impotential('git', Person.FIRST, is_plural=false);
+// => 'gidemem'
 
->>> impotential('git', Person.SECOND, is_plural=False)
-'gidemezsin'
+impotential('git', Person.SECOND, is_plural=false);
+// => 'gidemezsin'
 
->>> impotential('git', Person.THIRD, is_plural=False)
-'gidemez'
+impotential('git', Person.THIRD, is_plural=false);
+// => 'gidemez'
 
->>> impotential('git', Person.FIRST, is_plural=True)
-'gidemeyiz'
+impotential('git', Person.FIRST, is_plural=true);
+// => 'gidemeyiz'
 
->>> impotential('git', Person.FIRST, is_plural=True)
-'gidemeyiz'
+impotential('git', Person.FIRST, is_plural=true);
+// => 'gidemeyiz'
 
->>> impotential('git', Person.SECOND, is_plural=True)
+impotential('git', Person.SECOND, is_plural=true);
 'gidemezsiniz'
 
->>> impotential('git', Person.THIRD, is_plural=True)
-'gidemezler'
+impotential('git', Person.THIRD, is_plural=true);
+// => 'gidemezler'
 
->>> impotential('al', Person.THIRD, is_plural=True)
-'alamazlar'
+impotential('al', Person.THIRD, is_plural=true);
+// => 'alamazlar'
 
 ```
 
