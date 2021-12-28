@@ -252,5 +252,6 @@ const locative = text => {
 module.exports = {
   GrammaticalCase,
   getCaseProcessor,
-  locative
+  locative,
+  genitive
 }
